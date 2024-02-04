@@ -82,3 +82,89 @@ class OnlineSalesRegisterCollector:
             total *= 0.9  # применяем скидку 10%
 
         return total
+
+#5. Вычисли НДС для товаров со ставкой 20%
+#Напиши метод twenty_percent_tax_calculation. Он рассчитывает НДС товаров, у которых налоговая ставка 20%.
+#В теле метода:
+#Пустой список twenty_percent_tax.
+#Сюда метод добавляет товары из списка name_items, если в словаре tax_rate у них указана ставка 20%.
+#Пустой список total. Сюда метод добавляет цены товаров, которые включили в twenty_percent_tax.
+#Метод должен вернуть общую сумму НДС для позиций чека с максимальной ставкой.
+#Отталкивайся от формулы: НДС = стоимость товара * 0,2.
+#При расчете не забудь учесть скидку при количестве товаров больше 10.
+
+    def twenty_percent_tax_calculation(self):
+#Пустой список twenty_percent_tax.
+#Сюда метод добавляет товары из списка name_items, если в словаре tax_rate у них указана ставка 20%.
+        twenty_percent_tax=[]
+#Пустой список total.
+#Сюда метод добавляет цены товаров, которые включили в twenty_percent_tax
+        total=[]
+        for item in self.__name_items:
+            if self.__tax_rate[item] ==20:
+                twenty_percent_tax.append(item)
+                total.append(self.__item_price[item])
+
+#Метод должен вернуть общую сумму НДС для позиций чека с максимальной ставкой.
+        if len(twenty_percent_tax) > 10:
+            for i in range(len(twenty_percent_tax)):
+                total[i] *= 0.9  # применяем скидку 10%
+
+#Отталкивайся от формулы: НДС = стоимость товара * 0,2.
+        vat_total = sum([price * 0.2 for price in total])
+        return vat_total
+
+#6. Вычисли НДС для товаров со ставкой 10%
+#Напиши метод ten_percent_tax_calculation. Он рассчитывает НДС товаров, у которых ставка 10%.
+#В теле метода:
+#Пустой список ten_percent_tax.
+#Сюда метод добавляет товары из списка name_items, если в словаре tax_rate у них указана ставка 10%.
+#Пустой список total. Сюда метод добавляет цены товаров, которые включили в ten_percent_tax.
+#Метод должен вернуть общую сумму НДС для позиций чека со ставкой 10%.
+#Отталкивайся от формулы: НДС = стоимость товара * 0,1.
+#При расчете не забудь учесть скидку при количестве товаров больше 10.
+    def ten_percent_tax_calculation(self):
+#Пустой список ten_percent_tax.
+#Сюда метод добавляет товары из списка name_items, если в словаре tax_rate у них указана ставка 10%.
+        ten_percent_tax = []
+#Пустой список total.
+#Сюда метод добавляет цены товаров, которые включили в ten_percent_tax.
+        total = []
+
+        for item in self.__name_items:
+            if self.__tax_rate[item] == 10:
+                ten_percent_tax.append(item)
+                total.append(self.__item_price[item])
+
+#Метод должен вернуть общую сумму НДС для позиций чека со ставкой 10%.
+        if len(ten_percent_tax) > 10:
+            for i in range(len(ten_percent_tax)):
+                total[i] *= 0.9  # применяем скидку 10%
+
+#Отталкивайся от формулы: НДС = стоимость товара * 0,1.
+        vat_total = sum([price * 0.1 for price in total])
+        return vat_total
+
+
+#7. Посчитай общую сумму налогов
+#Напиши метод total_tax. Он возвращает общую сумму НДС по чеку.
+    def total_tax(self):
+        total_tax = sum([self.__item_price[item] * self.__tax_rate[item] / 100 for item in self.__name_items])
+        return total_tax
+
+
+#8. Верни номер телефона покупателя
+#Напиши статический метод get_telephone_number. Он возвращает номер телефона покупателя.
+#На вход метод принимает аргумент telephone_number. Это десять цифр после +7.
+#Чтобы метод вернул корректный номер, используй в теле условия:
+#Если передано не целое число, выводится исключение ValueError с текстом 'Необходимо ввести цифры';
+#Если в аргументе больше 10 символов, выводится исключение ValueError с текстом 'Необходимо ввести 10 цифр после "+7"';
+#В остальных случаях метод возвращает полный номер телефона.
+    @staticmethod
+    def get_telephone_number(telephone_number):
+        if not isinstance(telephone_number, int):
+            raise ValueError('Необходимо ввести цифры')
+        elif len(str(telephone_number)) > 10:
+            raise ValueError('Необходимо ввести 10 цифр после "+7"')
+        else:
+            return '+7' + str(telephone_number)
