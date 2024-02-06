@@ -38,12 +38,12 @@ class OnlineSalesRegisterCollector:
             raise ValueError ('Нельзя добавить товар, если в его названии нет символов или их больше 40')
 #Если названия товара нет в списке item_price, выводится исключение
 # NameError с текстом 'Позиция отсутствует в товарном справочнике'.
-        if  name is not self.__item_price:
+        if  name in self.__item_price:
             raise NameError ('Позиция отсутствует в товарном справочнике')
         else:
 #В остальных случаях метод добавляет товар в name_items и увеличивает значение number_items на 1.
             self.__name_items.append(name)
-            self.__name_items+=1
+
 
 #3. Удали товар из чека
 #Напиши метод delete_item_from_check. Он убирает товары из чека. Метод принимает аргумент name.
@@ -53,11 +53,11 @@ class OnlineSalesRegisterCollector:
 
     def delete_item_from_check(self,name):
 #Если товара нет в списке name_items, выводится исключение NameError с текстом 'Позиция отсутствует в чеке';
-        if name is not self.__name_items:
+        if name in self.__name_items:
             raise NameError('Позиция отсутствует в чеке')
         else:
             self.__name_items.remove(name)
-            self.__name_items-=1
+
 
 #4. Посчитай общую стоимость товаров
 #Напиши метод check_amount. Он считает общую сумму покупок.
